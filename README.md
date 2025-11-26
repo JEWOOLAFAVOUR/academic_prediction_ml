@@ -14,22 +14,26 @@ A comprehensive machine learning application for predicting student academic per
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Python 3.7 or higher
 - Required packages (see requirements.txt)
 
 ### Installation
 
 1. **Install Dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 2. **Run the Application**
+
    ```bash
    streamlit run streamlit_app.py
    ```
-   
+
    Or use the batch file on Windows:
+
    ```bash
    run_app.bat
    ```
@@ -46,14 +50,17 @@ A comprehensive machine learning application for predicting student academic per
 ## 🔍 Key Features Analyzed
 
 1. **Study Patterns**
+
    - Daily study hours
    - Class attendance percentage
 
 2. **Digital Habits**
+
    - Social media usage hours
    - Netflix/streaming hours
 
 3. **Lifestyle Factors**
+
    - Sleep hours per day
    - Exercise frequency
    - Diet quality
@@ -123,6 +130,7 @@ academic_prediction/
 ## 💡 Key Insights
 
 **Most Important Factors:**
+
 1. **Social Media Hours** (Negative impact) - Reduce usage for better performance
 2. **Study Hours per Day** (Positive impact) - Increase for better outcomes
 3. **Diet Quality** (Positive impact) - Good nutrition supports learning
@@ -152,6 +160,7 @@ For technical issues or questions about the model, please check the "ℹ️ Abou
 ## 🎓 Academic Use
 
 This tool is designed to support educational success by:
+
 - Providing early identification of at-risk students
 - Supporting data-driven intervention strategies
 - Helping with resource allocation for student support programs
