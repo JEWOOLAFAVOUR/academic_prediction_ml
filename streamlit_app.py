@@ -552,21 +552,130 @@ def single_prediction_page():
 def batch_prediction_page():
     """Batch prediction page"""
     st.markdown('<h2 class="sub-header">📊 Batch Prediction</h2>', unsafe_allow_html=True)
-    st.info("Upload a CSV file with student data for batch predictions.")
     
-    uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+    # Instructions and template
+    st.markdown("""
+    <div class="form-section">
+        <h4>📋 Instructions</h4>
+        <p>Upload a CSV file with student data. Make sure your CSV contains all required columns with exact names and valid values.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Sample template
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        st.markdown("### 📥 Upload Your Data")
+        uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+    
+    with col2:
+        st.markdown("### 📄 Download Sample Template")
+        # Create sample data
+        sample_data = {
+            'age': [20, 21, 19],
+            'gender': ['Male', 'Female', 'Male'],
+            'study_hours_per_day': [5.0, 6.2, 4.1],
+            'social_media_hours': [2.5, 1.8, 3.2],
+            'netflix_hours': [1.5, 0.8, 2.1],
+            'part_time_job': ['No', 'Yes', 'No'],
+            'attendance_percentage': [85.0, 92.5, 78.3],
+            'sleep_hours': [7.2, 6.8, 7.5],
+            'diet_quality': ['Good', 'Fair', 'Poor'],
+            'exercise_frequency': [4, 3, 2],
+            'parental_education_level': ['Bachelor', 'Master', 'High School'],
+            'internet_quality': ['Good', 'Average', 'Poor'],
+            'mental_health_rating': [7, 8, 6],
+            'extracurricular_participation': ['Yes', 'No', 'Yes']
+        }
+        sample_df = pd.DataFrame(sample_data)
+        csv_data = sample_df.to_csv(index=False)
+        st.download_button(
+            label="📥 Download Sample CSV",
+            data=csv_data,
+            file_name="sample_student_data.csv",
+            mime="text/csv",
+            help="Download this template and fill with your data"
+        )
+    
     if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file)
-        st.write("Data Preview:", df.head())
-        
-        if st.button("Run Batch Predictions"):
-            with st.spinner("Processing batch predictions..."):
-                try:
-                    results = predict_batch_students(df, st.session_state.components)
-                    st.success("Batch predictions completed!")
-                    st.write(results)
-                except Exception as e:
-                    st.error(f"Batch prediction failed: {str(e)}")
+        try:
+            df = pd.read_csv(uploaded_file)
+            
+            st.markdown("### 📊 Data Preview")
+            st.dataframe(df.head())
+            
+            # Validate data
+            is_valid, missing_cols, extra_cols = validate_input_data(df)
+            
+            if not is_valid:
+                st.error(f"❌ Missing required columns: {', '.join(missing_cols)}")
+                st.info("Please ensure your CSV has all required columns. Download the sample template above.")
+            else:
+                if extra_cols:
+                    st.warning(f"⚠️ Extra columns found (will be ignored): {', '.join(extra_cols)}")
+                
+                st.success("✅ Data format looks good!")
+                
+                if st.button("🚀 Run Batch Predictions", type="primary"):
+                    with st.spinner("🤖 Processing batch predictions..."):
+                        try:
+                            results = predict_batch_students(df, st.session_state.components)
+                            
+                            st.success("🎉 Batch predictions completed!")
+                            
+                            # Display results
+                            st.markdown("### 📈 Prediction Results")
+                            st.dataframe(results)
+                            
+                            # Download results
+                            results_csv = results.to_csv(index=False)
+                            st.download_button(
+                                label="📥 Download Results as CSV",
+                                data=results_csv,
+                                file_name="prediction_results.csv",
+                                mime="text/csv"
+                            )
+                            
+                            # Summary statistics
+                            col1, col2, col3 = st.columns(3)
+                            
+                            with col1:
+                                good_count = sum(results['LR_Prediction'] == 'Good')
+                                st.markdown(f"""
+                                <div class="metric-card">
+                                    <h3>🟢 Good Performance</h3>
+                                    <h2>{good_count}</h2>
+                                    <p>{good_count/len(results)*100:.1f}% of students</p>
+                                </div>
+                                """, unsafe_allow_html=True)
+                            
+                            with col2:
+                                avg_count = sum(results['LR_Prediction'] == 'Average')
+                                st.markdown(f"""
+                                <div class="metric-card">
+                                    <h3>🟡 Average Performance</h3>
+                                    <h2>{avg_count}</h2>
+                                    <p>{avg_count/len(results)*100:.1f}% of students</p>
+                                </div>
+                                """, unsafe_allow_html=True)
+                            
+                            with col3:
+                                poor_count = sum(results['LR_Prediction'] == 'Poor')
+                                st.markdown(f"""
+                                <div class="metric-card">
+                                    <h3>🔴 At-Risk Students</h3>
+                                    <h2>{poor_count}</h2>
+                                    <p>{poor_count/len(results)*100:.1f}% need support</p>
+                                </div>
+                                """, unsafe_allow_html=True)
+                                
+                        except Exception as e:
+                            st.error(f"❌ Batch prediction failed: {str(e)}")
+                            st.info("💡 Please check your data format and try again. Make sure categorical values match the expected format.")
+                            
+        except Exception as e:
+            st.error(f"❌ Error reading CSV file: {str(e)}")
+            st.info("Please make sure your file is a valid CSV format.")
 
 def analytics_page():
     """Analytics and insights page"""
