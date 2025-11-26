@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "name": "Academic Performance Prediction System",
+    "description": "Predicts student academic performance using study habits and personal factors",
+    "version": "1.0",
+    "created_date": "2025-11-26 13:38:57",
+    "dataset_size": "200 students, 16 features"
+  },
+  "target_variable": {
+    "original_column": "exam_score",
+    "categories": [
+      "Average",
+      "Good",
+      "Poor"
+    ],
+    "distribution": {
+      "Poor": 8,
+      "Average": 55,
+      "Good": 137
+    }
+  },
+  "features": {
+    "total_features": 14,
+    "feature_list": [
+      "age",
+      "gender",
+      "study_hours_per_day",
+      "social_media_hours",
+      "netflix_hours",
+      "part_time_job",
+      "attendance_percentage",
+      "sleep_hours",
+      "diet_quality",
+      "exercise_frequency",
+      "parental_education_level",
+      "internet_quality",
+      "mental_health_rating",
+      "extracurricular_participation"
+    ],
+    "categorical_features": [
+      "gender",
+      "part_time_job",
+      "diet_quality",
+      "parental_education_level",
+      "internet_quality",
+      "extracurricular_participation"
+    ],
+    "numerical_features": [
+      "age",
+      "study_hours_per_day",
+      "social_media_hours",
+      "netflix_hours",
+      "attendance_percentage",
+      "sleep_hours",
+      "exercise_frequency",
+      "mental_health_rating"
+    ],
+    "top_important_features": [
+      {
+        "feature": "social_media_hours",
+        "importance": 0.178,
+        "impact": "negative"
+      },
+      {
+        "feature": "study_hours_per_day",
+        "importance": 0.153,
+        "impact": "positive"
+      },
+      {
+        "feature": "diet_quality",
+        "importance": 0.134,
+        "impact": "positive"
+      },
+      {
+        "feature": "mental_health_rating",
+        "importance": 0.085,
+        "impact": "positive"
+      },
+      {
+        "feature": "extracurricular_participation",
+        "importance": 0.057,
+        "impact": "positive"
+      }
+    ]
+  },
+  "model_performance": {
+    "primary_model": {
+      "name": "Logistic Regression",
+      "accuracy": 0.575,
+      "accuracy_percentage": "57.5%",
+      "recommended": true
+    },
+    "secondary_model": {
+      "name": "Support Vector Machine",
+      "accuracy": 0.675,
+      "accuracy_percentage": "67.5%",
+      "recommended": false
+    }
+  }
+}

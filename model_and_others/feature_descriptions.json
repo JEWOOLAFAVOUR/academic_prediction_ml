@@ -1,0 +1,16 @@
+{
+  "age": "Student age (17-24 years)",
+  "gender": "Student gender (Male/Female)",
+  "study_hours_per_day": "Daily study hours (0.0-8.3)",
+  "social_media_hours": "Daily social media usage hours (0.0-7.2)",
+  "netflix_hours": "Daily Netflix/streaming hours (0.0-5.4)",
+  "part_time_job": "Has part-time job (Yes/No)",
+  "attendance_percentage": "Class attendance percentage (56-100)",
+  "sleep_hours": "Daily sleep hours (3.2-10.0)",
+  "diet_quality": "Diet quality (Poor/Fair/Good)",
+  "exercise_frequency": "Exercise frequency per week (0-6)",
+  "parental_education_level": "Parent education (High School/Bachelor/Master)",
+  "internet_quality": "Internet connection quality (Poor/Average/Good)",
+  "mental_health_rating": "Mental health rating (1-10 scale)",
+  "extracurricular_participation": "Participates in extracurricular (Yes/No)"
+}

@@ -1,0 +1,6 @@
+age,gender,study_hours_per_day,social_media_hours,netflix_hours,part_time_job,attendance_percentage,sleep_hours,diet_quality,exercise_frequency,parental_education_level,internet_quality,mental_health_rating,extracurricular_participation
+20,Male,5.5,1.5,1.0,No,95.0,7.5,Good,4,Master,Good,8,Yes
+22,Female,2.0,4.0,3.5,Yes,70.0,5.0,Poor,1,High School,Average,3,No
+19,Male,7.0,0.8,0.5,No,98.5,8.0,Good,5,Bachelor,Good,9,Yes
+21,Female,1.5,5.2,2.8,Yes,65.0,4.5,Fair,2,Master,Poor,2,No
+23,Male,4.0,2.5,1.8,No,88.0,6.5,Fair,3,Bachelor,Average,6,Yes
